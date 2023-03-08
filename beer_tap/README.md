@@ -29,3 +29,6 @@ The workflow of this API is as follows:
 At the end of the event the promoters will want to know how much money they make with this new approach. So, we have to provide some information about how many times a dispenser was used, for how long, and how much money made with each service.
 
 Time limitation: 3 hours
+
+The challange can be found here:
+https://go.rviewer.io/dev-beer-tap-dispenser-api/
