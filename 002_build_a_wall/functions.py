@@ -1,3 +1,7 @@
+from validator import User_input_validator
+from pydantic import ValidationError
+
+
 def contruction(number_of_rows, number_of_bricks):
     FULL_BRICK = '■■'
     HALF_BRICK = '■'
@@ -13,7 +17,14 @@ def contruction(number_of_rows, number_of_bricks):
     return wall
 
 
-def validation(numbers):
+def correct_parameters(user_input):
+    try:
+        User_input_validator(
+            user_input=user_input,
+        )
+    except ValidationError as e:
+        print(e)
+        return
     try:
         number_of_rows, number_of_bricks = numbers.split()
     except:
