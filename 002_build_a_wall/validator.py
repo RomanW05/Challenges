@@ -1,25 +1,24 @@
 # from interfaces import IValidator
-from pydantic import BaseModel, ValidationError, validator
+from pydantic import BaseModel, validator
 
 class User_input_validator(BaseModel):
     user_input: str
 
     @validator("user_input")
     def input_must_contain_space(cls, v):
-        print(v, 'spaces', type(v))
         if ' ' not in v:
+            print('null\n')
             raise ValueError('User input must contain a space')
         return v.title()
 
     @validator("user_input")
     def integers_check(cls, v):
-        print(v.title())
-        print(v, 'integers', type(v))
         number1, number2 = v.split(' ')
         try:
             number1 = int(number1)
             number2 = int(number2)
         except:
+            print('null\n')
             raise ValueError('Both parameters must be integers')
         
         return [number1, number2]
@@ -29,7 +28,11 @@ class User_input_validator(BaseModel):
     def boundry_values(cls, v):
         for index, number in enumerate(v):
             if number < 1:
+                print('null\n')
                 raise ValueError(f'Parameter with index {index} must be greater then 1')
+        if v[0] * v[1] > 10000:
+            print("Naah, too much...here's my resignation.\n")
+            raise ValueError(f'Parameters too big')
 
         
     

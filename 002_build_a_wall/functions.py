@@ -2,7 +2,7 @@ from validator import User_input_validator
 from pydantic import ValidationError
 
 
-def contruction(number_of_rows, number_of_bricks):
+def wall_contruction(number_of_rows, number_of_bricks):
     FULL_BRICK = '■■'
     HALF_BRICK = '■'
     MORTAR = '|'
@@ -17,34 +17,22 @@ def contruction(number_of_rows, number_of_bricks):
     return wall
 
 
+def operations_on_user_input(user_input):
+    number_of_rows, number_of_bricks = user_input.split()
+    number_of_rows = int(number_of_rows)
+    number_of_bricks = int(number_of_bricks)
+
+    return True, number_of_rows, number_of_bricks
+
+
 def correct_parameters(user_input):
     try:
         User_input_validator(
             user_input=user_input,
         )
     except ValidationError as e:
-        print(e)
-        return
-    try:
-        number_of_rows, number_of_bricks = numbers.split()
-    except:
-        print('null\n')
         return False, 0, 0
     
-    try:
-        number_of_rows = int(number_of_rows)
-        number_of_bricks = int(number_of_bricks)
-    except:
-        print('null\n')
-        return False, 1, 0
+    return operations_on_user_input(user_input)
     
-    if number_of_rows < 1 or number_of_bricks < 1:
-        print('null\n')
-        return False, 1, 1
     
-    total_bricks = number_of_rows * number_of_bricks
-    if total_bricks > 10000:
-        print("Naah, too much...here's my resignation.\n")
-        return False, 2, 0
-
-    return True, number_of_rows, number_of_bricks
